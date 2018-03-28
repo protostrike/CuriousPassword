@@ -3,8 +3,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -14,7 +17,6 @@ import javax.swing.JTextField;
 
 public class GetterPanel extends JPanel {
 	private static final long serialVersionUID = 1L;
-
 	public GetterPanel() {
 		setPanel();
 		setSize(700, 650);
@@ -55,7 +57,8 @@ public class GetterPanel extends JPanel {
 	// read from text file and store every line into a list
 	private static List<String[]> readBooklet() {
 		List<String[]> lis = new ArrayList<String[]>();
-		try (BufferedReader br = new BufferedReader(new FileReader("secret.txt"))) {
+		InputStream is = PasswordGenerator.class.getResourceAsStream("secret.txt");
+		try (BufferedReader br = new BufferedReader(new InputStreamReader(is))) {
 			for (String line; (line = br.readLine()) != null;) {
 				lis.add(line.trim().split("\\s+"));
 			}
