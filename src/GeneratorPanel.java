@@ -19,13 +19,18 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
+import javax.swing.event.AncestorEvent;
+import javax.swing.event.AncestorListener;
 
 public class GeneratorPanel extends JPanel {
 	private static final long serialVersionUID = 1L;
-	public HashMap<String,String> passwords = new HashMap<String, String>();
+	private HashMap<String,String> passwords = new HashMap<String, String>();
+	private HashMap<String,JTextField> testPasswords = new HashMap<String,JTextField>();
 	public Random randomGenerator = new Random();
 	
 	public GeneratorPanel() {
+		
+		
 		passwords.put("bank", "");
 		passwords.put("email", "");
 		passwords.put("shop", "");
@@ -38,13 +43,40 @@ public class GeneratorPanel extends JPanel {
 		add(message1,BorderLayout.PAGE_START);
 		add(message2,BorderLayout.PAGE_START);
 		
-		TitledBorder border = BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), "Generator", TitledBorder.DEFAULT_POSITION,
+		TitledBorder border = BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), "Generator & Tester", TitledBorder.DEFAULT_POSITION,
 				TitledBorder.TOP, new Font("Times New Roman", Font.PLAIN, 14), Color.BLACK);
 		setBorder(border);
 		
 		createBankPanel();
 		createEmailPanel();
 		createShopPanel();
+		
+		addAncestorListener(new AncestorListener() {
+
+			@Override
+			public void ancestorAdded(AncestorEvent arg0) {
+				// TODO Auto-generated method stub
+				testPasswords.get("bank").setText("");
+				testPasswords.get("email").setText("");
+				testPasswords.get("shop").setText("");
+			}
+
+			@Override
+			public void ancestorMoved(AncestorEvent arg0) {
+				// TODO Auto-generated method stub
+				testPasswords.get("bank").setText("");
+				testPasswords.get("email").setText("");
+				testPasswords.get("shop").setText("");
+			}
+
+			@Override
+			public void ancestorRemoved(AncestorEvent arg0) {
+				// TODO Auto-generated method stub
+				testPasswords.get("bank").setText("");
+				testPasswords.get("email").setText("");
+				testPasswords.get("shop").setText("");
+			}
+		});
 		
 		setLayout(new BorderLayout());
 	}
@@ -69,13 +101,20 @@ public class GeneratorPanel extends JPanel {
 		
 		JTextField vali = new JTextField();
 		vali.setBounds(10, 160, 100, 30);
-		newPanel.add(vali);
+		testPasswords.put("bank", vali);
 		
-		JButton v = createValidateButton("bank", vali.getText());
+		JButton v = createValidateButton("bank");
 		v.setBounds(10, 200, 100, 30);
 		newPanel.add(v);
 		
-		
+		vali.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				v.doClick();
+			}
+		});
+		newPanel.add(vali);
 		newPanel.setLayout(new BorderLayout());
 		newPanel.setBounds(50, 100, 200, 300);
 		add(newPanel,BorderLayout.LINE_START);
@@ -102,11 +141,19 @@ public class GeneratorPanel extends JPanel {
 		JTextField vali = new JTextField();
 		vali.setBounds(10, 160, 100, 30);
 		newPanel.add(vali);
+		testPasswords.put("email", vali);
 		
-		JButton v = createValidateButton("email", vali.getText());
+		JButton v = createValidateButton("email");
 		v.setBounds(10, 200, 100, 30);
 		newPanel.add(v);
 		
+		vali.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				v.doClick();
+			}
+		});
 		newPanel.setLayout(new BorderLayout());
 		newPanel.setBounds(250, 100, 200, 300);
 		add(newPanel,BorderLayout.CENTER);
@@ -133,11 +180,20 @@ public class GeneratorPanel extends JPanel {
 		JTextField vali = new JTextField();
 		vali.setBounds(10, 160, 100, 30);
 		newPanel.add(vali);
+		testPasswords.put("shop", vali);
 		
-		JButton v = createValidateButton("shop", vali.getText());
+		JButton v = createValidateButton("shop");
 		v.setBounds(10, 200, 100, 30);
 		newPanel.add(v);
 		
+		
+		vali.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				v.doClick();
+			}
+		});
 		newPanel.setLayout(new BorderLayout());
 		newPanel.setBounds(450, 100, 200, 300);
 		add(newPanel,BorderLayout.LINE_END);
@@ -163,11 +219,11 @@ public class GeneratorPanel extends JPanel {
 		String actualPassword = "";
 		String password = "";
 		for (int i = 0; i < 2; i++) {
-			randomRow = randomGenerator.nextInt(passwordList.size());
-			randomWord = randomGenerator.nextInt(passwordList.get(randomRow).length);
+			randomRow = 1 + randomGenerator.nextInt(passwordList.size()-1);
+			randomWord = 1 + randomGenerator.nextInt(passwordList.get(randomRow).length-1);
 			password += intFormat(randomRow);
 			password += intFormat(randomWord);
-			actualPassword += passwordList.get(randomRow)[randomWord];
+			actualPassword += passwordList.get(randomRow-1)[randomWord-1];
 		}
 		passwords.put(key, actualPassword);
 		return password;
@@ -198,13 +254,13 @@ public class GeneratorPanel extends JPanel {
 	}
 
 	// Create button for testing password
-	private JButton createValidateButton(String key, String testPassword) {
+	private JButton createValidateButton(String key) {
 		JButton button = new JButton("Validate");
 		button.addActionListener(new ActionListener() {
 			@Override
 			// Display your test result in a new window
 			public void actionPerformed(ActionEvent arg0) {
-				JOptionPane.showMessageDialog(null, testPassword(passwords.get(key), testPassword),
+				JOptionPane.showMessageDialog(null, testPassword(passwords.get(key), testPasswords.get(key).getText()),
 						"Validate", JOptionPane.PLAIN_MESSAGE);
 			}
 		});
@@ -213,12 +269,11 @@ public class GeneratorPanel extends JPanel {
 
 	// Test your password
 	private String testPassword(String password, String test) {
-		if (!password.equals(test))
-			return "Wrong password!!!";
-		else if(test=="null")
+		if (test=="")
 			return "Password can not be empty";
+		else if(!password.equals(test))
+			return "Wrong password!!!";
 		else
 			return "Correct password!!!";
 	}
-
 }
