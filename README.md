@@ -1,7 +1,9 @@
 # CuriousPassword
 
-Simply download and run .exe file.
+This is a simple project to generate three password based on a "secret" technique, like Morse Code.
+Download and run .exe file.
 Enjoy!!!
+Note: You need to upgrade your Java SE Development Kit(JDK) to 9 in order to make my program work!!!
 
 Mar 28th 6:30 PM.
 Ver 1.1.1
