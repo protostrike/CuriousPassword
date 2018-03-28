@@ -4,7 +4,6 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
@@ -18,6 +17,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 
 public class GeneratorPanel extends JPanel {
@@ -29,10 +29,23 @@ public class GeneratorPanel extends JPanel {
 		passwords.put("bank", "");
 		passwords.put("email", "");
 		passwords.put("shop", "");
-		setSize(700, 650);
+		setSize(400, 400);
+		
+		JLabel message1 = new JLabel("Click 'Get' for your password. Click 'Validate' to test your password.");
+		JLabel message2 = new JLabel("You can find your password by clicking 'Menu'->'Get Password'.");
+		message1.setBounds(10, 20, 500, 20);
+		message2.setBounds(10, 40, 500, 20);
+		add(message1,BorderLayout.PAGE_START);
+		add(message2,BorderLayout.PAGE_START);
+		
+		TitledBorder border = BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), "Generator", TitledBorder.DEFAULT_POSITION,
+				TitledBorder.TOP, new Font("Times New Roman", Font.PLAIN, 14), Color.BLACK);
+		setBorder(border);
+		
 		createBankPanel();
 		createEmailPanel();
 		createShopPanel();
+		
 		setLayout(new BorderLayout());
 	}
 	
@@ -43,24 +56,29 @@ public class GeneratorPanel extends JPanel {
 		newPanel.setBorder(border);
 		
 		JLabel bankLabel = new JLabel("Your banking password");
-		bankLabel.setBounds(10, 50, 150, 30);
+		bankLabel.setBounds(10, 20, 150, 30);
 		newPanel.add(bankLabel);
 		
 		JButton b = createPasswordButton("bank");
-		b.setBounds(15, 80, 100, 30);
+		b.setBounds(10, 50, 100, 30);
+		newPanel.add(b);
+		
+		JLabel test = new JLabel("Enter your password: ");
+		test.setBounds(10, 120, 150, 30);
+		newPanel.add(test);
 		
 		JTextField vali = new JTextField();
-		vali.setBounds(15, 120, 100, 30);
+		vali.setBounds(10, 160, 100, 30);
+		newPanel.add(vali);
 		
 		JButton v = createValidateButton("bank", vali.getText());
-		v.setBounds(15, 160, 100, 30);
-		
-		newPanel.add(b);
+		v.setBounds(10, 200, 100, 30);
 		newPanel.add(v);
-		newPanel.add(vali);
+		
+		
 		newPanel.setLayout(new BorderLayout());
-		newPanel.setBounds(10, 50, 150, 300);
-		add(newPanel);
+		newPanel.setBounds(50, 100, 200, 300);
+		add(newPanel,BorderLayout.LINE_START);
 	}
 
 	private void createEmailPanel() {
@@ -70,21 +88,28 @@ public class GeneratorPanel extends JPanel {
 		newPanel.setBorder(border);
 		
 		JLabel bankLabel = new JLabel("Your email password");
-		bankLabel.setBounds(10, 50, 150, 30);
+		bankLabel.setBounds(10, 20, 150, 30);
 		newPanel.add(bankLabel);
 		
 		JButton b = createPasswordButton("email");
-		b.setBounds(15, 80, 100, 30);
-		JTextField vali = new JTextField();
-		vali.setBounds(15, 120, 100, 30);
-		JButton v = createValidateButton("email", vali.getText());
-		v.setBounds(15, 160, 100, 30);
+		b.setBounds(10, 50, 100, 30);
 		newPanel.add(b);
-		newPanel.add(v);
+		
+		JLabel test = new JLabel("Enter your password: ");
+		test.setBounds(10, 120, 150, 30);
+		newPanel.add(test);
+		
+		JTextField vali = new JTextField();
+		vali.setBounds(10, 160, 100, 30);
 		newPanel.add(vali);
+		
+		JButton v = createValidateButton("email", vali.getText());
+		v.setBounds(10, 200, 100, 30);
+		newPanel.add(v);
+		
 		newPanel.setLayout(new BorderLayout());
-		newPanel.setBounds(160, 50, 150, 300);
-		add(newPanel);
+		newPanel.setBounds(250, 100, 200, 300);
+		add(newPanel,BorderLayout.CENTER);
 	}
 	
 	private void createShopPanel() {
@@ -94,21 +119,28 @@ public class GeneratorPanel extends JPanel {
 		newPanel.setBorder(border);
 		
 		JLabel bankLabel = new JLabel("Your shopping password");
-		bankLabel.setBounds(10, 50, 150, 30);
+		bankLabel.setBounds(10, 20, 150, 30);
 		newPanel.add(bankLabel);
 		
 		JButton b = createPasswordButton("shop");
-		b.setBounds(15, 80, 100, 30);
-		JTextField vali = new JTextField();
-		vali.setBounds(15, 120, 100, 30);
-		JButton v = createValidateButton("shop", vali.getText());
-		v.setBounds(15, 160, 100, 30);
+		b.setBounds(10, 50, 100, 30);
 		newPanel.add(b);
-		newPanel.add(v);
+		
+		JLabel test = new JLabel("Enter your password: ");
+		test.setBounds(10, 120, 150, 30);
+		newPanel.add(test);
+		
+		JTextField vali = new JTextField();
+		vali.setBounds(10, 160, 100, 30);
 		newPanel.add(vali);
+		
+		JButton v = createValidateButton("shop", vali.getText());
+		v.setBounds(10, 200, 100, 30);
+		newPanel.add(v);
+		
 		newPanel.setLayout(new BorderLayout());
-		newPanel.setBounds(320, 50, 150, 300);
-		add(newPanel);
+		newPanel.setBounds(450, 100, 200, 300);
+		add(newPanel,BorderLayout.LINE_END);
 	}
 	// read from text file and store every line into a list
 	private List<String[]> readBooklet() {
@@ -172,7 +204,7 @@ public class GeneratorPanel extends JPanel {
 			@Override
 			// Display your test result in a new window
 			public void actionPerformed(ActionEvent arg0) {
-				JOptionPane.showMessageDialog(null, "your password is " + testPassword(passwords.get(key), testPassword),
+				JOptionPane.showMessageDialog(null, testPassword(passwords.get(key), testPassword),
 						"Validate", JOptionPane.PLAIN_MESSAGE);
 			}
 		});
@@ -181,10 +213,12 @@ public class GeneratorPanel extends JPanel {
 
 	// Test your password
 	private String testPassword(String password, String test) {
-		if (password.equals(test))
-			return "correct";
+		if (!password.equals(test))
+			return "Wrong password!!!";
+		else if(test=="null")
+			return "Password can not be empty";
 		else
-			return "wrong";
+			return "Correct password!!!";
 	}
 
 }

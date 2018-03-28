@@ -1,44 +1,58 @@
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
-
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.border.EtchedBorder;
+import javax.swing.border.TitledBorder;
 
 public class GetterPanel extends JPanel {
 	private static final long serialVersionUID = 1L;
 	public GetterPanel() {
 		setPanel();
-		setSize(700, 650);
+		JLabel message1 = new JLabel("Enter your 12-digit number below, and click 'Get'. ");
+		JLabel message2 = new JLabel("Once you have your password, go back to 'Generator' to test it.");
+		message1.setBounds(10, 20, 500, 20);
+		message2.setBounds(10, 40, 500, 20);
+		add(message1,BorderLayout.PAGE_START);
+		add(message2,BorderLayout.PAGE_START);
+
+		TitledBorder border = BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), "Get Password", TitledBorder.DEFAULT_POSITION,
+				TitledBorder.TOP, new Font("Times New Roman", Font.PLAIN, 14), Color.BLACK);
+		setBorder(border);
+		setSize(400, 400);
 		setLayout(new BorderLayout());
 		setVisible(true);
 	}
 
 	private void setPanel() {
-		JLabel input = new JLabel("Enter your number here");
-		input.setBounds(100, 20, 150, 30);
+		JPanel newPanel = new JPanel();
+		
+		JLabel input = new JLabel("Enter your number: ");
+		input.setBounds(10, 20, 150, 30);
 		
 		JTextField number = new JTextField();
-		number.setBounds(100, 60, 150, 30);
+		number.setBounds(10, 50, 150, 30);
 		
 		JButton b = new JButton("Get");
-		b.setBounds(100, 100, 150, 30);
+		b.setBounds(10, 100, 150, 30);
 		
-		JLabel output = new JLabel("Your password is here");
-		output.setBounds(100, 140, 150, 30);
+		JLabel output = new JLabel("Your password is: ");
+		output.setBounds(10, 140, 150, 30);
 		
 		JTextArea password = new JTextArea();
-		password.setBounds(100, 170, 150, 30);
+		password.setBounds(10, 170, 150, 30);
 		password.setEditable(false);
 		
 		b.addActionListener(new ActionListener() {
@@ -48,12 +62,16 @@ public class GetterPanel extends JPanel {
 			}
 		});
 		
-		add(input);
-		add(output);
-		add(b);
-		add(number);
-		add(password);
+		newPanel.add(input);
+		newPanel.add(output);
+		newPanel.add(b);
+		newPanel.add(number);
+		newPanel.add(password);
+		newPanel.setLayout(new BorderLayout());
+		newPanel.setBounds(50, 100, 200, 300);
+		add(newPanel, BorderLayout.CENTER);
 	}
+	
 	// read from text file and store every line into a list
 	private static List<String[]> readBooklet() {
 		List<String[]> lis = new ArrayList<String[]>();

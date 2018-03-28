@@ -1,11 +1,14 @@
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.HeadlessException;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.util.Observable;
 import java.util.Observer;
 
+import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -19,7 +22,7 @@ public class MainPage extends JFrame implements Observer{
 	private Controller control = new Controller();
 	
 	 
-	public MainPage() throws HeadlessException {
+	public MainPage() throws HeadlessException, IOException {
 		control.addObserver(this);
 		cardPanel = setCards();
 		//add(cardPanel);
@@ -29,6 +32,8 @@ public class MainPage extends JFrame implements Observer{
 		setLayout(null);
 		setResizable(false);
 		setTitle("Curious Password");
+		Image img= ImageIO.read(PasswordGenerator.class.getResource("password1.png"));
+		setIconImage(img);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setVisible(true);
 	}
@@ -66,7 +71,7 @@ public class MainPage extends JFrame implements Observer{
 		JPanel cards = new JPanel(cardLayout);
 		cards.add(card1,"card1");
 		cards.add(card2,"card2");
-		cards.setBounds(0, 0, 700, 650);
+		cards.setBounds(10, 10, 720, 500);
 		return cards;
 	}
 	public static void start() {
