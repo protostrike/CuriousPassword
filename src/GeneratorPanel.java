@@ -7,6 +7,7 @@ import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
@@ -205,7 +206,7 @@ public class GeneratorPanel extends JPanel {
 	// read from text file and store every line into a list
 	private List<String[]> readBooklet() {
 		List<String[]> lis = new ArrayList<String[]>();
-		InputStream is = PasswordGenerator.class.getResourceAsStream("secret.txt");
+		InputStream is = PasswordGenerator.class.getResourceAsStream("encodedSecret.txt");
 		try (BufferedReader br = new BufferedReader(new InputStreamReader(is))){
 			for (String line; (line = br.readLine()) != null;) {
 				lis.add(line.trim().split("\\s+"));
@@ -227,7 +228,7 @@ public class GeneratorPanel extends JPanel {
 			randomWord = 1 + randomGenerator.nextInt(passwordList.get(randomRow).length-1);
 			password += intFormat(randomRow);
 			password += intFormat(randomWord);
-			actualPassword += passwordList.get(randomRow-1)[randomWord-1];
+			actualPassword += decode(passwordList.get(randomRow-1)[randomWord-1]);
 		}
 		passwords.put(key, actualPassword);
 		return password;
@@ -273,11 +274,19 @@ public class GeneratorPanel extends JPanel {
 
 	// Test your password
 	private String testPassword(String password, String test) {
+		System.out.println(password);
 		if (test=="")
 			return "Password can not be empty";
 		else if(!password.equals(test))
 			return "Wrong password!!!";
 		else
 			return "Correct password!!!";
+	}
+	
+	//Decode word
+	private String decode(String word) {
+		String output = "";
+		output = new String(Base64.getDecoder().decode(word));
+		return output;
 	}
 }

@@ -7,6 +7,7 @@ import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -112,7 +113,7 @@ public class GetterPanel extends JPanel {
 	// read from text file and store every line into a list
 	private static List<String[]> readBooklet() {
 		List<String[]> lis = new ArrayList<String[]>();
-		InputStream is = PasswordGenerator.class.getResourceAsStream("secret.txt");
+		InputStream is = PasswordGenerator.class.getResourceAsStream("encodedSecret.txt");
 		try (BufferedReader br = new BufferedReader(new InputStreamReader(is))) {
 			for (String line; (line = br.readLine()) != null;) {
 				lis.add(line.trim().split("\\s+"));
@@ -135,12 +136,17 @@ public class GetterPanel extends JPanel {
 			for (int i = 0; i < 4; i += 2) {
 				int row = Integer.parseInt(splitedPassword[i]) - 1;
 				int word = Integer.parseInt(splitedPassword[i + 1]) - 1;
-				literalPassword += booklet.get(row)[word];
+				literalPassword += decode(booklet.get(row)[word]);
 			}
 			return literalPassword;
 		} catch (NumberFormatException e) {
 			return "Nondigital Input.\nCheck your input";
 		}
 	}
-
+	//Decode word
+		private static String decode(String word) {
+			String output = "";
+			output = new String(Base64.getDecoder().decode(word));
+			return output;
+		}
 }

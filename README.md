@@ -1,13 +1,16 @@
 # CuriousPassword
 
 This is a simple project to generate three password based on a "secret" technique, like Morse Code.
-Download and run .exe file.
+Download and run .jar file.
 Enjoy!!!
 Note: You need to upgrade your Java SE Development Kit(JDK) to 9 in order to make my program work!!!
 
-Mar 29th 12 AM
-Ver 1.1.2(Incomplete)
+Mar 29th 3:30 PM
+Ver 1.1.2
 Improved UI
+Changed secret.txt with encodedSecret.txt
+Added JAR file
+Deleted executable because I can not make it work on Mac at this time. 
 
 Mar 28th 6:30 PM.
 Ver 1.1.1
