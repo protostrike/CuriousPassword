@@ -16,6 +16,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
@@ -25,21 +26,21 @@ import javax.swing.event.AncestorListener;
 public class GeneratorPanel extends JPanel {
 	private static final long serialVersionUID = 1L;
 	private HashMap<String,String> passwords = new HashMap<String, String>();
-	private HashMap<String,JTextField> testPasswords = new HashMap<String,JTextField>();
+	private HashMap<String,JPasswordField> testPasswords = new HashMap<String,JPasswordField>();
 	public Random randomGenerator = new Random();
 	
 	public GeneratorPanel() {
-		
-		
 		passwords.put("bank", "");
 		passwords.put("email", "");
 		passwords.put("shop", "");
 		setSize(400, 400);
 		
 		JLabel message1 = new JLabel("Click 'Get' for your password. Click 'Validate' to test your password.");
-		JLabel message2 = new JLabel("You can find your password by clicking 'Menu'->'Get Password'.");
+		JLabel message2 = new JLabel("You can find your password by clicking 'Menu'>>'Get Password'.");
 		message1.setBounds(10, 20, 500, 20);
+		message1.setFont(new Font("Times New Roman",Font.PLAIN,13));
 		message2.setBounds(10, 40, 500, 20);
+		message2.setFont(new Font("Times New Roman",Font.PLAIN,13));
 		add(message1,BorderLayout.PAGE_START);
 		add(message2,BorderLayout.PAGE_START);
 		
@@ -99,7 +100,7 @@ public class GeneratorPanel extends JPanel {
 		test.setBounds(10, 120, 150, 30);
 		newPanel.add(test);
 		
-		JTextField vali = new JTextField();
+		JPasswordField vali = new JPasswordField();
 		vali.setBounds(10, 160, 100, 30);
 		testPasswords.put("bank", vali);
 		
@@ -116,6 +117,7 @@ public class GeneratorPanel extends JPanel {
 		});
 		newPanel.add(vali);
 		newPanel.setLayout(new BorderLayout());
+		newPanel.setBackground(Color.WHITE);
 		newPanel.setBounds(50, 100, 200, 300);
 		add(newPanel,BorderLayout.LINE_START);
 	}
@@ -138,7 +140,7 @@ public class GeneratorPanel extends JPanel {
 		test.setBounds(10, 120, 150, 30);
 		newPanel.add(test);
 		
-		JTextField vali = new JTextField();
+		JPasswordField vali = new JPasswordField();
 		vali.setBounds(10, 160, 100, 30);
 		newPanel.add(vali);
 		testPasswords.put("email", vali);
@@ -155,6 +157,7 @@ public class GeneratorPanel extends JPanel {
 			}
 		});
 		newPanel.setLayout(new BorderLayout());
+		newPanel.setBackground(Color.WHITE);
 		newPanel.setBounds(250, 100, 200, 300);
 		add(newPanel,BorderLayout.CENTER);
 	}
@@ -177,7 +180,7 @@ public class GeneratorPanel extends JPanel {
 		test.setBounds(10, 120, 150, 30);
 		newPanel.add(test);
 		
-		JTextField vali = new JTextField();
+		JPasswordField vali = new JPasswordField();
 		vali.setBounds(10, 160, 100, 30);
 		newPanel.add(vali);
 		testPasswords.put("shop", vali);
@@ -195,6 +198,7 @@ public class GeneratorPanel extends JPanel {
 			}
 		});
 		newPanel.setLayout(new BorderLayout());
+		newPanel.setBackground(Color.WHITE);
 		newPanel.setBounds(450, 100, 200, 300);
 		add(newPanel,BorderLayout.LINE_END);
 	}

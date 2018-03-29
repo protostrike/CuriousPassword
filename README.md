@@ -5,6 +5,10 @@ Download and run .exe file.
 Enjoy!!!
 Note: You need to upgrade your Java SE Development Kit(JDK) to 9 in order to make my program work!!!
 
+Mar 29th 12 AM
+Ver 1.1.2(Incomplete)
+Improved UI
+
 Mar 28th 6:30 PM.
 Ver 1.1.1
 Fixed the bug when user enter ambiguous input in getter interface.
