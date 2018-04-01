@@ -3,7 +3,10 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.util.Base64;
+import java.util.Date;
 import java.util.HashMap;
 
 import javax.swing.BorderFactory;
@@ -90,13 +93,27 @@ public class TesterPanel extends JPanel {
 				v.doClick();
 			}
 		});
+		vali.addFocusListener(new FocusListener() {
+
+			@Override
+			public void focusGained(FocusEvent arg0) {
+				// TODO Auto-generated method stub
+				MainPage.logData.add(new LogDatum(MainPage.name, new Date(), "login", "start"));
+			}
+
+			@Override
+			public void focusLost(FocusEvent arg0) {
+				// TODO Auto-generated method stub
+			}
+
+		});
 		newPanel.add(vali);
 
 
 		JButton next = new JButton("Next");
 		next.setBounds(10, 180, 100, 30);
 		next.setEnabled(false);
-		nexts.put("shop", next);
+		nexts.put("bank", next);
 		next.addActionListener(new ActionListener() {
 
 			@Override
@@ -125,6 +142,20 @@ public class TesterPanel extends JPanel {
 
 		JPasswordField vali = new JPasswordField();
 		vali.setBounds(10, 60, 100, 30);
+		vali.addFocusListener(new FocusListener() {
+
+			@Override
+			public void focusGained(FocusEvent arg0) {
+				// TODO Auto-generated method stub
+				MainPage.logData.add(new LogDatum(MainPage.name, new Date(), "login", "start"));
+			}
+
+			@Override
+			public void focusLost(FocusEvent arg0) {
+				// TODO Auto-generated method stub
+			}
+
+		});
 		newPanel.add(vali);
 		testPasswords.put("email", vali);
 
@@ -171,6 +202,20 @@ public class TesterPanel extends JPanel {
 				v.doClick();
 			}
 		});
+		vali.addFocusListener(new FocusListener() {
+
+			@Override
+			public void focusGained(FocusEvent arg0) {
+				// TODO Auto-generated method stub
+				MainPage.logData.add(new LogDatum(MainPage.name, new Date(), "login", "start"));
+			}
+
+			@Override
+			public void focusLost(FocusEvent arg0) {
+				// TODO Auto-generated method stub
+			}
+
+		});
 
 		JButton next = new JButton("Next");
 		next.setBounds(10, 180, 100, 30);
@@ -201,7 +246,7 @@ public class TesterPanel extends JPanel {
 			@Override
 			// Display your test result in a new window
 			public void actionPerformed(ActionEvent arg0) {
-				if (testPassword(key) == true) {
+				if (testPassword(key) == true && nexts.containsKey(key)) {
 					nexts.get(key).setEnabled(true);
 				}
 			}
@@ -215,19 +260,20 @@ public class TesterPanel extends JPanel {
 		String test = testPasswords.get(key).getText();
 		Integer time = timers.get(key);
 		if (!password.equals(test)) {
+			MainPage.logData.add(new LogDatum(MainPage.name, new Date(), "login", "failure"));
 			if ((time + 1) < 3) {
 				timers.put(key, time + 1);
-			} else
-				output();
-			JOptionPane.showMessageDialog(null, "Wrong password!!!");
-			return false;
+				JOptionPane.showMessageDialog(null, "Wrong password!!!");
+				return false;
+			} 
+			else {
+				JOptionPane.showMessageDialog(null, "Wrong password three times!!!");
+				return true;
+			}
 		} else {
 			JOptionPane.showMessageDialog(null, "Correct password!!!");
+			MainPage.logData.add(new LogDatum(MainPage.name, new Date(), "login", "success"));
 			return true;
 		}
-	}
-
-	private void output() {
-
 	}
 }
