@@ -26,14 +26,9 @@ import javax.swing.event.AncestorListener;
 
 public class GeneratorPanel extends JPanel {
 	private static final long serialVersionUID = 1L;
-	private HashMap<String,String> passwords = new HashMap<String, String>();
-	private HashMap<String,JPasswordField> testPasswords = new HashMap<String,JPasswordField>();
 	public Random randomGenerator = new Random();
 	
 	public GeneratorPanel() {
-		passwords.put("bank", "");
-		passwords.put("email", "");
-		passwords.put("shop", "");
 		setSize(400, 400);
 		
 		JLabel message1 = new JLabel("Click 'Get' for your password. Click 'Validate' to test your password.");
@@ -45,40 +40,13 @@ public class GeneratorPanel extends JPanel {
 		add(message1,BorderLayout.PAGE_START);
 		add(message2,BorderLayout.PAGE_START);
 		
-		TitledBorder border = BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), "Generator & Tester", TitledBorder.DEFAULT_POSITION,
+		TitledBorder border = BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), "Generator", TitledBorder.DEFAULT_POSITION,
 				TitledBorder.TOP, new Font("Times New Roman", Font.PLAIN, 14), Color.BLACK);
 		setBorder(border);
 		
 		createBankPanel();
 		createEmailPanel();
 		createShopPanel();
-		
-		addAncestorListener(new AncestorListener() {
-
-			@Override
-			public void ancestorAdded(AncestorEvent arg0) {
-				// TODO Auto-generated method stub
-				testPasswords.get("bank").setText("");
-				testPasswords.get("email").setText("");
-				testPasswords.get("shop").setText("");
-			}
-
-			@Override
-			public void ancestorMoved(AncestorEvent arg0) {
-				// TODO Auto-generated method stub
-				testPasswords.get("bank").setText("");
-				testPasswords.get("email").setText("");
-				testPasswords.get("shop").setText("");
-			}
-
-			@Override
-			public void ancestorRemoved(AncestorEvent arg0) {
-				// TODO Auto-generated method stub
-				testPasswords.get("bank").setText("");
-				testPasswords.get("email").setText("");
-				testPasswords.get("shop").setText("");
-			}
-		});
 		
 		setLayout(new BorderLayout());
 	}
@@ -96,27 +64,7 @@ public class GeneratorPanel extends JPanel {
 		JButton b = createPasswordButton("bank");
 		b.setBounds(10, 50, 100, 30);
 		newPanel.add(b);
-		
-		JLabel test = new JLabel("Enter your password: ");
-		test.setBounds(10, 120, 150, 30);
-		newPanel.add(test);
-		
-		JPasswordField vali = new JPasswordField();
-		vali.setBounds(10, 160, 100, 30);
-		testPasswords.put("bank", vali);
-		
-		JButton v = createValidateButton("bank");
-		v.setBounds(10, 200, 100, 30);
-		newPanel.add(v);
-		
-		vali.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				// TODO Auto-generated method stub
-				v.doClick();
-			}
-		});
-		newPanel.add(vali);
+
 		newPanel.setLayout(new BorderLayout());
 		newPanel.setBackground(Color.WHITE);
 		newPanel.setBounds(50, 100, 200, 300);
@@ -137,26 +85,7 @@ public class GeneratorPanel extends JPanel {
 		b.setBounds(10, 50, 100, 30);
 		newPanel.add(b);
 		
-		JLabel test = new JLabel("Enter your password: ");
-		test.setBounds(10, 120, 150, 30);
-		newPanel.add(test);
 		
-		JPasswordField vali = new JPasswordField();
-		vali.setBounds(10, 160, 100, 30);
-		newPanel.add(vali);
-		testPasswords.put("email", vali);
-		
-		JButton v = createValidateButton("email");
-		v.setBounds(10, 200, 100, 30);
-		newPanel.add(v);
-		
-		vali.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				// TODO Auto-generated method stub
-				v.doClick();
-			}
-		});
 		newPanel.setLayout(new BorderLayout());
 		newPanel.setBackground(Color.WHITE);
 		newPanel.setBounds(250, 100, 200, 300);
@@ -177,27 +106,6 @@ public class GeneratorPanel extends JPanel {
 		b.setBounds(10, 50, 100, 30);
 		newPanel.add(b);
 		
-		JLabel test = new JLabel("Enter your password: ");
-		test.setBounds(10, 120, 150, 30);
-		newPanel.add(test);
-		
-		JPasswordField vali = new JPasswordField();
-		vali.setBounds(10, 160, 100, 30);
-		newPanel.add(vali);
-		testPasswords.put("shop", vali);
-		
-		JButton v = createValidateButton("shop");
-		v.setBounds(10, 200, 100, 30);
-		newPanel.add(v);
-		
-		
-		vali.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				// TODO Auto-generated method stub
-				v.doClick();
-			}
-		});
 		newPanel.setLayout(new BorderLayout());
 		newPanel.setBackground(Color.WHITE);
 		newPanel.setBounds(450, 100, 200, 300);
@@ -230,7 +138,7 @@ public class GeneratorPanel extends JPanel {
 			password += intFormat(randomWord);
 			actualPassword += decode(passwordList.get(randomRow-1)[randomWord-1]);
 		}
-		passwords.put(key, actualPassword);
+		MainPage.passwords.put(key, actualPassword);
 		return password;
 	}
 
@@ -257,36 +165,11 @@ public class GeneratorPanel extends JPanel {
 		});
 		return button;
 	}
-
-	// Create button for testing password
-	private JButton createValidateButton(String key) {
-		JButton button = new JButton("Validate");
-		button.addActionListener(new ActionListener() {
-			@Override
-			// Display your test result in a new window
-			public void actionPerformed(ActionEvent arg0) {
-				JOptionPane.showMessageDialog(null, testPassword(passwords.get(key), testPasswords.get(key).getText()),
-						"Validate", JOptionPane.PLAIN_MESSAGE);
-			}
-		});
-		return button;
-	}
-
-	// Test your password
-	private String testPassword(String password, String test) {
-		System.out.println(password);
-		if (test=="")
-			return "Password can not be empty";
-		else if(!password.equals(test))
-			return "Wrong password!!!";
-		else
-			return "Correct password!!!";
-	}
+	// Decode word
+		private String decode(String word) {
+			String output = "";
+			output = new String(Base64.getDecoder().decode(word));
+			return output;
+		}
 	
-	//Decode word
-	private String decode(String word) {
-		String output = "";
-		output = new String(Base64.getDecoder().decode(word));
-		return output;
-	}
 }
