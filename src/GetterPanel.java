@@ -36,7 +36,7 @@ public class GetterPanel extends JPanel {
 
 		TitledBorder border = BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED),
 				"Get Password", TitledBorder.DEFAULT_POSITION, TitledBorder.TOP,
-				new Font("Times New Roman", Font.PLAIN, 14), Color.BLACK);
+				new Font("Times New Roman", Font.PLAIN, 18), Color.BLACK);
 		setBorder(border);
 		setSize(400, 400);
 		setLayout(new BorderLayout());

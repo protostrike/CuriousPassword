@@ -66,7 +66,7 @@ public class TesterPanel extends JPanel {
 		});
 		setLayout(new BorderLayout());
 		TitledBorder border = BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED),
-				"Tester", TitledBorder.DEFAULT_POSITION, TitledBorder.TOP, new Font("Times New Roman", Font.PLAIN, 14),
+				"Tester", TitledBorder.DEFAULT_POSITION, TitledBorder.TOP, new Font("Times New Roman", Font.PLAIN, 18),
 				Color.BLACK);
 		setBorder(border);
 	}
@@ -126,7 +126,6 @@ public class TesterPanel extends JPanel {
 		newPanel.add(next);
 
 		newPanel.setLayout(new BorderLayout());
-		newPanel.setBackground(Color.WHITE);
 		newPanel.setBounds(250, 100, 200, 300);
 		newPanel.setVisible(false);
 		add(newPanel, BorderLayout.LINE_START);
@@ -172,7 +171,6 @@ public class TesterPanel extends JPanel {
 		});
 
 		newPanel.setLayout(new BorderLayout());
-		newPanel.setBackground(Color.WHITE);
 		newPanel.setBounds(450, 100, 200, 300);
 		newPanel.setVisible(false);
 		add(newPanel, BorderLayout.CENTER);
@@ -233,7 +231,6 @@ public class TesterPanel extends JPanel {
 		newPanel.add(next);
 		
 		newPanel.setLayout(new BorderLayout());
-		newPanel.setBackground(Color.WHITE);
 		newPanel.setBounds(50, 100, 200, 300);
 		add(newPanel, BorderLayout.LINE_END);
 		panelControl.put("shop", newPanel);

@@ -5,6 +5,13 @@ Download and run .jar file.
 Enjoy!!!
 Note: You need to upgrade your Java SE Development Kit(JDK) to 9 in order to make my program work!!!
 
+
+
+Apr 1st 1:30 AM
+Ver 1.1.3
+Seperated tester and generator into different panels
+Added a feature that the log data will write out to desktop as CSV file.
+
 Mar 29th 3:30 PM
 Ver 1.1.2
 Improved UI

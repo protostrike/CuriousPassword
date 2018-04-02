@@ -35,25 +35,60 @@ public class GeneratorPanel extends JPanel {
 	public GeneratorPanel() {
 		setSize(400, 400);
 
+		//
 		JLabel message1 = new JLabel(
-				"Click 'Get' for your password. Click 'test' to test your password. Click 'Confirm' to confirm your password");
-		JLabel message2 = new JLabel("You can find your password by clicking 'Menu'>>'Get Password'.");
-		message1.setBounds(10, 20, 500, 20);
+				"Click 'Get' for your password. Click 'test' to test your password." );
+		JLabel message2 = new JLabel("You can find your password by clicking 'Menu'>>'Get Password'. ");
+		JLabel message3 = new JLabel("Try it in the box below, then click 'Confirm' to confirm your password.");
+		JLabel message4 = new JLabel("Just click 'Get' again if you don't like this password");
+		JLabel message5 =  new JLabel("Once you click 'Confirm', you cannot get new password again.");
+		message1.setBounds(10, 20, 700, 15);
 		message1.setFont(new Font("Times New Roman", Font.PLAIN, 13));
-		message2.setBounds(10, 40, 500, 20);
+		message2.setBounds(10, 35, 700, 15);
 		message2.setFont(new Font("Times New Roman", Font.PLAIN, 13));
+		message3.setBounds(10, 50, 700, 15);
+		message3.setFont(new Font("Times New Roman", Font.PLAIN, 13));
+		message4.setBounds(10, 65, 700, 15);
+		message4.setFont(new Font("Times New Roman", Font.PLAIN, 13));
+		message5.setBounds(10, 80, 700, 15);
+		message5.setFont(new Font("Times New Roman", Font.PLAIN, 13));
 		add(message1, BorderLayout.PAGE_START);
 		add(message2, BorderLayout.PAGE_START);
 
 		TitledBorder border = BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED),
 				"Generator", TitledBorder.DEFAULT_POSITION, TitledBorder.TOP,
-				new Font("Times New Roman", Font.PLAIN, 14), Color.BLACK);
+				new Font("Times New Roman", Font.PLAIN, 18), Color.BLACK);
 		setBorder(border);
 
 		createBankPanel();
 		createEmailPanel();
 		createShopPanel();
+		addAncestorListener(new AncestorListener() {
 
+			@Override
+			public void ancestorAdded(AncestorEvent arg0) {
+				// TODO Auto-generated method stub
+				testPasswords.get("bank").setText("");
+				testPasswords.get("email").setText("");
+				testPasswords.get("shop").setText("");
+			}
+
+			@Override
+			public void ancestorMoved(AncestorEvent arg0) {
+				// TODO Auto-generated method stub
+				testPasswords.get("bank").setText("");
+				testPasswords.get("email").setText("");
+				testPasswords.get("shop").setText("");
+			}
+
+			@Override
+			public void ancestorRemoved(AncestorEvent arg0) {
+				// TODO Auto-generated method stub
+				testPasswords.get("bank").setText("");
+				testPasswords.get("email").setText("");
+				testPasswords.get("shop").setText("");
+			}
+		});
 		setLayout(new BorderLayout());
 	}
 
