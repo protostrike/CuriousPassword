@@ -6,6 +6,10 @@ Enjoy!!!
 Note: You need to upgrade your Java SE Development Kit(JDK) to 9 in order to make my program work!!!
 
 
+Apr 2rd 
+Ver 1.1.3
+Fixed the bug that log data will overwrite instead of update
+Added the feature that the next password will not shown if the previous one is not confirmed.
 
 Apr 1st 1:30 AM
 Ver 1.1.3

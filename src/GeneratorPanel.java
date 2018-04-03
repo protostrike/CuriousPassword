@@ -196,10 +196,10 @@ public class GeneratorPanel extends JPanel {
 
 		JButton confirm = new JButton("Confirm");
 		confirm.addActionListener(new ActionListener() {
-
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				b.setEnabled(false);
+				panels.get("shop").setVisible(true);
 			}
 
 		});
