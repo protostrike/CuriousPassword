@@ -1,13 +1,16 @@
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
+import java.awt.Font;
 import java.awt.HeadlessException;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.Date;
@@ -18,6 +21,7 @@ import java.util.Observer;
 
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -44,7 +48,7 @@ public class MainPage extends JFrame implements Observer {
 		// add(cardPanel);
 		add(cardPanel, BorderLayout.CENTER);
 		setMenu();
-		setSize(800, 600);
+		setSize(1024, 768);
 		setLayout(null);
 		setResizable(false);
 		setTitle("Curious Password");
@@ -52,8 +56,11 @@ public class MainPage extends JFrame implements Observer {
 		setIconImage(img);
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+		JLabel title = new JLabel("Curious Password");
+		title.setFont(new Font(null, Font.ITALIC, 25));
+		title.setBounds(300,10,500,30);
+		add(title);
 		addWindowListener(new WindowListener() {
-
 			@Override
 			public void windowClosed(WindowEvent arg0) {
 				// TODO Auto-generated method stub
@@ -105,7 +112,7 @@ public class MainPage extends JFrame implements Observer {
 		});
 		setVisible(true);
 		
-		name = JOptionPane.showInputDialog("Give us a nickname");
+		getUserName();
 		logData.add(new LogDatum(name, new Date(), "login", "start"));
 	}
 
@@ -151,11 +158,13 @@ public class MainPage extends JFrame implements Observer {
 		JPanel card1 = new GeneratorPanel();
 		JPanel card2 = new GetterPanel();
 		JPanel card3 = new TesterPanel();
+		JPanel blank = new JPanel();
 		JPanel cards = new JPanel(cardLayout);
+		cards.add(blank,"blank");
 		cards.add(card1, "card1");
 		cards.add(card2, "card2");
 		cards.add(card3, "card3");
-		cards.setBounds(10, 10, 720, 500);
+		cards.setBounds(10, 50, 1000, 700);
 		return cards;
 	}
 
@@ -164,11 +173,24 @@ public class MainPage extends JFrame implements Observer {
 		String fileName = userHome+"/Desktop/LogData.csv";
 		String newLine = System.getProperty("line.separator");
 		MainPage.logData.add(new LogDatum(MainPage.name, new Date(), "exit", "good"));
-		FileWriter writer = new FileWriter(fileName);
+		File log = new File(fileName);
+		if(log.exists()==false)
+			log.createNewFile();
+		PrintWriter out = new PrintWriter(new FileWriter(log,true));
 		for(LogDatum ld: logData) {
-			writer.write(ld.toCSV()+newLine);
+			out.append(ld.toCSV()+newLine);
 		}
-		writer.close();
+		out.close();
+	}
+	
+	private void getUserName() {
+		String input = JOptionPane.showInputDialog("Give us a nickname");
+		if(input==null)
+			System.exit(1);
+		else {
+			name = input;
+			control.changePanel("card1");
+		}
 	}
 	
 	@Override

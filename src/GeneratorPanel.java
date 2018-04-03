@@ -31,29 +31,30 @@ public class GeneratorPanel extends JPanel {
 	private static final long serialVersionUID = 1L;
 	public Random randomGenerator = new Random();
 	private HashMap<String, JTextField> testPasswords = new HashMap<String, JTextField>();
-
+	private HashMap<String, JPanel> panels = new HashMap<>();
+	
 	public GeneratorPanel() {
-		setSize(400, 400);
-
-		//
 		JLabel message1 = new JLabel(
 				"Click 'Get' for your password. Click 'test' to test your password." );
 		JLabel message2 = new JLabel("You can find your password by clicking 'Menu'>>'Get Password'. ");
-		JLabel message3 = new JLabel("Try it in the box below, then click 'Confirm' to confirm your password.");
+		JLabel message3 = new JLabel("Try it in the box below, then click 'Confirm' to confirm your password and move to next one.");
 		JLabel message4 = new JLabel("Just click 'Get' again if you don't like this password");
 		JLabel message5 =  new JLabel("Once you click 'Confirm', you cannot get new password again.");
-		message1.setBounds(10, 20, 700, 15);
-		message1.setFont(new Font("Times New Roman", Font.PLAIN, 13));
-		message2.setBounds(10, 35, 700, 15);
-		message2.setFont(new Font("Times New Roman", Font.PLAIN, 13));
-		message3.setBounds(10, 50, 700, 15);
-		message3.setFont(new Font("Times New Roman", Font.PLAIN, 13));
-		message4.setBounds(10, 65, 700, 15);
-		message4.setFont(new Font("Times New Roman", Font.PLAIN, 13));
-		message5.setBounds(10, 80, 700, 15);
-		message5.setFont(new Font("Times New Roman", Font.PLAIN, 13));
+		message1.setBounds(10, 20, 700, 25);
+		message1.setFont(new Font("Times New Roman", Font.PLAIN, 15));
+		message2.setBounds(10, 45, 700, 25);
+		message2.setFont(new Font("Times New Roman", Font.PLAIN, 15));
+		message3.setBounds(10, 70, 700, 25);
+		message3.setFont(new Font("Times New Roman", Font.PLAIN, 15));
+		message4.setBounds(10, 95, 700, 25);
+		message4.setFont(new Font("Times New Roman", Font.PLAIN, 15));
+		message5.setBounds(10, 120, 700, 25);
+		message5.setFont(new Font("Times New Roman", Font.PLAIN, 15));
 		add(message1, BorderLayout.PAGE_START);
 		add(message2, BorderLayout.PAGE_START);
+		add(message3, BorderLayout.PAGE_START);
+		add(message4, BorderLayout.PAGE_START);
+		add(message5, BorderLayout.PAGE_START);
 
 		TitledBorder border = BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED),
 				"Generator", TitledBorder.DEFAULT_POSITION, TitledBorder.TOP,
@@ -139,15 +140,16 @@ public class GeneratorPanel extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				b.setEnabled(false);
+				panels.get("email").setVisible(true);
 			}
 
 		});
 		confirm.setBounds(10, 170, 100, 30);
 		newPanel.add(confirm);
-
+		newPanel.setBounds(10, 150, 300, 500);
 		newPanel.setLayout(new BorderLayout());
 		newPanel.setBackground(Color.WHITE);
-		newPanel.setBounds(50, 100, 200, 300);
+		panels.put("bank", newPanel);
 		add(newPanel, BorderLayout.LINE_START);
 	}
 
@@ -203,10 +205,11 @@ public class GeneratorPanel extends JPanel {
 		});
 		confirm.setBounds(10, 170, 100, 30);
 		newPanel.add(confirm);
-
+		newPanel.setBounds(310, 150, 300, 500);
 		newPanel.setLayout(new BorderLayout());
 		newPanel.setBackground(Color.WHITE);
-		newPanel.setBounds(250, 100, 200, 300);
+		panels.put("email", newPanel);
+		newPanel.setVisible(false);
 		add(newPanel, BorderLayout.CENTER);
 	}
 
@@ -257,15 +260,17 @@ public class GeneratorPanel extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				b.setEnabled(false);
+				panels.get("shop").setVisible(true);
 			}
 
 		});
 		confirm.setBounds(10, 170, 100, 30);
 		newPanel.add(confirm);
-
+		newPanel.setBounds(610, 150, 300, 500);
 		newPanel.setLayout(new BorderLayout());
 		newPanel.setBackground(Color.WHITE);
-		newPanel.setBounds(450, 100, 200, 300);
+		newPanel.setVisible(false);
+		panels.put("shop", newPanel);
 		add(newPanel, BorderLayout.LINE_END);
 	}
 
