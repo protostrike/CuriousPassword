@@ -1,5 +1,6 @@
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.HeadlessException;
 import java.awt.Image;
@@ -12,7 +13,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.Base64;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -111,7 +111,7 @@ public class MainPage extends JFrame implements Observer {
 			
 		});
 		setVisible(true);
-		
+		getContentPane().setBackground(new Color(141,182,0));
 		getUserName();
 		logData.add(new LogDatum(name, new Date(), "login", "start"));
 	}
@@ -156,9 +156,13 @@ public class MainPage extends JFrame implements Observer {
 
 	private JPanel setCards() {
 		JPanel card1 = new GeneratorPanel();
+		card1.setBackground(new Color(141,182,0));
 		JPanel card2 = new GetterPanel();
+		card2.setBackground(new Color(141,182,0));
 		JPanel card3 = new TesterPanel();
+		card3.setBackground(new Color(141,182,0));
 		JPanel blank = new JPanel();
+		blank.setBackground(new Color(141,182,0));
 		JPanel cards = new JPanel(cardLayout);
 		cards.add(blank,"blank");
 		cards.add(card1, "card1");

@@ -5,12 +5,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
-import java.util.Base64;
 import java.util.Date;
 import java.util.HashMap;
 
 import javax.swing.BorderFactory;
-import javax.swing.Icon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -28,7 +26,8 @@ public class TesterPanel extends JPanel {
 	private HashMap<String, JPanel> panelControl = new HashMap<String, JPanel>();
 	private HashMap<String, Integer> timers = new HashMap<String, Integer>();
 	private HashMap<String, JButton> nexts = new HashMap<String, JButton>();
-
+	private HashMap<String, JButton> validates = new HashMap<String, JButton>();
+	
 	public TesterPanel() {
 		timers.put("bank", 0);
 		timers.put("shop", 0);
@@ -75,7 +74,7 @@ public class TesterPanel extends JPanel {
 		JPanel newPanel = new JPanel();
 
 		JLabel test = new JLabel("Enter your bank password: ");
-		test.setBounds(10, 20, 150, 30);
+		test.setBounds(10, 20, 200, 30);
 		newPanel.add(test);
 
 		JPasswordField vali = new JPasswordField();
@@ -129,6 +128,7 @@ public class TesterPanel extends JPanel {
 		newPanel.setBounds(250, 100, 200, 300);
 		newPanel.setVisible(false);
 		add(newPanel, BorderLayout.LINE_START);
+		newPanel.setBackground(new Color(230,230,220));
 		panelControl.put("bank", newPanel);
 	}
 
@@ -136,7 +136,7 @@ public class TesterPanel extends JPanel {
 		JPanel newPanel = new JPanel();
 
 		JLabel test = new JLabel("Enter your email password: ");
-		test.setBounds(10, 20, 150, 30);
+		test.setBounds(10, 20, 200, 30);
 		newPanel.add(test);
 
 		JPasswordField vali = new JPasswordField();
@@ -173,6 +173,7 @@ public class TesterPanel extends JPanel {
 		newPanel.setLayout(new BorderLayout());
 		newPanel.setBounds(450, 100, 200, 300);
 		newPanel.setVisible(false);
+		newPanel.setBackground(new Color(230,230,220));
 		add(newPanel, BorderLayout.CENTER);
 		panelControl.put("email", newPanel);
 	}
@@ -181,7 +182,7 @@ public class TesterPanel extends JPanel {
 		JPanel newPanel = new JPanel();
 
 		JLabel test = new JLabel("Enter your shopping password: ");
-		test.setBounds(10, 20, 150, 30);
+		test.setBounds(10, 20, 200, 30);
 		newPanel.add(test);
 
 		JPasswordField vali = new JPasswordField();
@@ -232,6 +233,7 @@ public class TesterPanel extends JPanel {
 		
 		newPanel.setLayout(new BorderLayout());
 		newPanel.setBounds(50, 100, 200, 300);
+		newPanel.setBackground(new Color(230,230,220));
 		add(newPanel, BorderLayout.LINE_END);
 		panelControl.put("shop", newPanel);
 	}
@@ -248,6 +250,7 @@ public class TesterPanel extends JPanel {
 				}
 			}
 		});
+		validates.put(key, button);
 		return button;
 	}
 
@@ -265,6 +268,7 @@ public class TesterPanel extends JPanel {
 			} 
 			else {
 				JOptionPane.showMessageDialog(null, "Wrong password three times!!!");
+				validates.get(key).setEnabled(false);
 				return true;
 			}
 		} else {

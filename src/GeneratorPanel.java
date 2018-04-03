@@ -20,7 +20,6 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
@@ -34,21 +33,20 @@ public class GeneratorPanel extends JPanel {
 	private HashMap<String, JPanel> panels = new HashMap<>();
 	
 	public GeneratorPanel() {
-		JLabel message1 = new JLabel(
-				"Click 'Get' for your password. Click 'test' to test your password." );
-		JLabel message2 = new JLabel("You can find your password by clicking 'Menu'>>'Get Password'. ");
+		JLabel message1 = new JLabel("Click 'Get' for your password. This is not your actual password. You need to find your password by clicking 'Menu'>>'Get Password'." );
+		JLabel message2 = new JLabel("The 12-digit number is actually four three-digit parts, the first and second, and the third and fourth determine two words respectively.");
 		JLabel message3 = new JLabel("Try it in the box below, then click 'Confirm' to confirm your password and move to next one.");
 		JLabel message4 = new JLabel("Just click 'Get' again if you don't like this password");
 		JLabel message5 =  new JLabel("Once you click 'Confirm', you cannot get new password again.");
-		message1.setBounds(10, 20, 700, 25);
+		message1.setBounds(10, 20, 850, 25);
 		message1.setFont(new Font("Times New Roman", Font.PLAIN, 15));
-		message2.setBounds(10, 45, 700, 25);
+		message2.setBounds(10, 45, 850, 25);
 		message2.setFont(new Font("Times New Roman", Font.PLAIN, 15));
-		message3.setBounds(10, 70, 700, 25);
+		message3.setBounds(10, 70, 850, 25);
 		message3.setFont(new Font("Times New Roman", Font.PLAIN, 15));
-		message4.setBounds(10, 95, 700, 25);
+		message4.setBounds(10, 95, 850, 25);
 		message4.setFont(new Font("Times New Roman", Font.PLAIN, 15));
-		message5.setBounds(10, 120, 700, 25);
+		message5.setBounds(10, 120, 850, 25);
 		message5.setFont(new Font("Times New Roman", Font.PLAIN, 15));
 		add(message1, BorderLayout.PAGE_START);
 		add(message2, BorderLayout.PAGE_START);
@@ -126,12 +124,12 @@ public class GeneratorPanel extends JPanel {
 			}
 
 		});
-		testpw.setBounds(10, 110, 150, 30);
+		testpw.setBounds(10, 120, 150, 30);
 		testPasswords.put("bank", testpw);
 		newPanel.add(testpw);
 
 		JButton tb = createTestButton("bank");
-		tb.setBounds(10, 140, 100, 30);
+		tb.setBounds(10, 160, 100, 30);
 		newPanel.add(tb);
 
 		JButton confirm = new JButton("Confirm");
@@ -144,11 +142,11 @@ public class GeneratorPanel extends JPanel {
 			}
 
 		});
-		confirm.setBounds(10, 170, 100, 30);
+		confirm.setBounds(10, 200, 100, 30);
 		newPanel.add(confirm);
 		newPanel.setBounds(10, 150, 300, 500);
 		newPanel.setLayout(new BorderLayout());
-		newPanel.setBackground(Color.WHITE);
+		newPanel.setBackground(new Color(129,165,148));
 		panels.put("bank", newPanel);
 		add(newPanel, BorderLayout.LINE_START);
 	}
@@ -172,7 +170,7 @@ public class GeneratorPanel extends JPanel {
 		newPanel.add(test);
 
 		JTextField testpw = new JTextField();
-		testpw.setBounds(10, 110, 150, 30);
+		testpw.setBounds(10, 120, 150, 30);
 		testpw.addFocusListener(new FocusListener() {
 
 			@Override
@@ -191,7 +189,7 @@ public class GeneratorPanel extends JPanel {
 		newPanel.add(testpw);
 
 		JButton tb = createTestButton("email");
-		tb.setBounds(10, 140, 100, 30);
+		tb.setBounds(10, 160, 100, 30);
 		newPanel.add(tb);
 
 		JButton confirm = new JButton("Confirm");
@@ -203,13 +201,13 @@ public class GeneratorPanel extends JPanel {
 			}
 
 		});
-		confirm.setBounds(10, 170, 100, 30);
+		confirm.setBounds(10, 200, 100, 30);
 		newPanel.add(confirm);
 		newPanel.setBounds(310, 150, 300, 500);
 		newPanel.setLayout(new BorderLayout());
-		newPanel.setBackground(Color.WHITE);
 		panels.put("email", newPanel);
 		newPanel.setVisible(false);
+		newPanel.setBackground(new Color(129,165,148));
 		add(newPanel, BorderLayout.CENTER);
 	}
 
@@ -232,7 +230,7 @@ public class GeneratorPanel extends JPanel {
 		newPanel.add(test);
 
 		JTextField testpw = new JTextField();
-		testpw.setBounds(10, 110, 150, 30);
+		testpw.setBounds(10, 120, 150, 30);
 		testpw.addFocusListener(new FocusListener() {
 
 			@Override
@@ -251,7 +249,7 @@ public class GeneratorPanel extends JPanel {
 		newPanel.add(testpw);
 
 		JButton tb = createTestButton("shop");
-		tb.setBounds(10, 140, 100, 30);
+		tb.setBounds(10, 160, 100, 30);
 		newPanel.add(tb);
 
 		JButton confirm = new JButton("Confirm");
@@ -264,11 +262,11 @@ public class GeneratorPanel extends JPanel {
 			}
 
 		});
-		confirm.setBounds(10, 170, 100, 30);
+		confirm.setBounds(10, 200, 100, 30);
 		newPanel.add(confirm);
 		newPanel.setBounds(610, 150, 300, 500);
 		newPanel.setLayout(new BorderLayout());
-		newPanel.setBackground(Color.WHITE);
+		newPanel.setBackground(new Color(129,165,148));
 		newPanel.setVisible(false);
 		panels.put("shop", newPanel);
 		add(newPanel, BorderLayout.LINE_END);
