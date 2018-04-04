@@ -291,12 +291,12 @@ public class GeneratorPanel extends JPanel {
 		List<String[]> passwordList = readBooklet();
 		int randomRow, randomWord;
 		String actualPassword = "";
-		String password = "";
+		String password = "|";
 		for (int i = 0; i < 2; i++) {
 			randomRow = 1 + randomGenerator.nextInt(passwordList.size() - 1);
 			randomWord = 1 + randomGenerator.nextInt(passwordList.get(randomRow).length - 1);
-			password += intFormat(randomRow);
-			password += intFormat(randomWord);
+			password += intFormat(randomRow)+"|";
+			password += intFormat(randomWord)+"|";
 			actualPassword += decode(passwordList.get(randomRow - 1)[randomWord - 1]);
 		}
 		MainPage.passwords.put(key, actualPassword);
